@@ -135,6 +135,18 @@ export default {
   box-sizing: border-box;
 }
 
+button{
+  font-family: '微軟正黑體';
+  cursor: pointer;
+  font-size: 2rem;
+  outline: none;
+  border: none;
+  padding: 10px;
+  background: rgba(85,37,130,.5);
+  color: #FDB927;
+  margin-bottom: 35px;
+}
+
 body {
   font-family: 'montserrat', sans-serif;
 }
