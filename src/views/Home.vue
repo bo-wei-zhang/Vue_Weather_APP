@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div :class="typeof weather.main != 'undefined' && weather.main.temp > 16 ? 'warm' : ''" class="home">
     <main>
       <div class="search-box">
         <input
@@ -45,7 +45,6 @@ export default {
   },
   methods: {
     getPositionWeather() {
-     
       console.log(this.lat, this.lon)
 
       fetch(
@@ -123,7 +122,8 @@ export default {
       (err) => {
         this.gettingLocation = false
         this.errorStr = err.message
-      }
+      },
+      { timeout: 10000 }
     )
   },
 }
@@ -159,7 +159,7 @@ body {
   transition: 0.4s;
 }
 
-#app.warm {
+.warm {
   background-image: url('../assets/warm-bg.jpg');
 }
 
