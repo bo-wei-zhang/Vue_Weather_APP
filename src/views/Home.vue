@@ -166,6 +166,7 @@ export default {
       (err) => {
         this.gettingLocation = false
         this.errorStr = err.message
+        alert(error.code + ": " + error.message);
       },
       { timeout: 10000 }
     )
