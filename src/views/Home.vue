@@ -45,6 +45,7 @@ export default {
   },
   methods: {
     getPositionWeather() {
+     
       console.log(this.lat, this.lon)
 
       fetch(
