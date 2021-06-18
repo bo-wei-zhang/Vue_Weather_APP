@@ -1,5 +1,10 @@
 <template>
-  <div :class="typeof weather.main != 'undefined' && weather.main.temp > 16 ? 'warm' : ''" class="home">
+  <div
+    :class="
+      typeof weather.main != 'undefined' && weather.main.temp > 16 ? 'warm' : ''
+    "
+    class="home"
+  >
     <main>
       <div class="search-box">
         <input
@@ -10,6 +15,7 @@
           @keypress.enter="fetchWeather"
         />
       </div>
+      <Cities @get-city="getCity($event)" :cities="cities" />
       <button @click="getPositionWeather">取得當前地區天氣</button>
       <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
         <div class="location-box">
@@ -29,10 +35,12 @@
 
 <script>
 // @ is an alias to /src
-
+import Cities from '../components/Cities.vue'
 export default {
   name: 'Home',
-  components: {},
+  components: {
+    Cities,
+  },
   data() {
     return {
       api_key: 'c2f1dd42276e57bdfa93f97f1ef46583',
@@ -41,9 +49,45 @@ export default {
       weather: {},
       lat: '',
       lon: '',
+      cities: [
+        'Taipei',
+        'New Taipei',
+        'Keelung',
+        'Taoyuan',
+        'Hsinchu',
+        'Miaoli',
+        'Taichung',
+        'Changhua',
+        'Nantou',
+        'Yunlin',
+        'Chiayi',
+        'Tainan',
+        'Kaohsiung',
+        'Pingtung',
+        'Yilan',
+        'Hualien',
+        'Taitung ',
+        'Penghu',
+        'Green Island',
+        'Orchid Island',
+        'Kinmen',
+        'Matsu',
+      ],
     }
   },
+
   methods: {
+    getCity(selected) {
+      console.log(selected)
+      fetch(
+        `${this.url_base}weather?q=${selected}&units=metric&APPID=${this.api_key}`
+        //  `${this.url_base}weather?lat=${this.lat}&lon=${this.lon}&APPID=${this.api_key}`
+      )
+        .then((res) => {
+          return res.json()
+        })
+        .then(this.setResults)
+    },
     getPositionWeather() {
       console.log(this.lat, this.lon)
 
@@ -136,7 +180,11 @@ export default {
   box-sizing: border-box;
 }
 
-button {
+select {
+  margin-right: 10px;
+}
+button,
+select {
   font-family: '微軟正黑體';
   cursor: pointer;
   font-size: 2rem;
