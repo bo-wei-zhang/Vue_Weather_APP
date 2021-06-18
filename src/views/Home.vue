@@ -16,7 +16,7 @@
           <div class="location">
             {{ weather.name }}, {{ weather.sys.country }}
           </div>
-          <div class="date">{{dateBuilder()}}</div>
+          <div class="date">{{ dateBuilder() }}</div>
         </div>
         <div class="weather-box">
           <div class="temp">{{ Math.round(weather.main.temp) }}°c</div>
@@ -39,22 +39,22 @@ export default {
       url_base: 'https://api.openweathermap.org/data/2.5/',
       query: '',
       weather: {},
-      lat:'',
-      lon:'',
+      lat: '',
+      lon: '',
     }
   },
   methods: {
     getPositionWeather() {
-      console.log(this.lat,this.lon)
-     
+      console.log(this.lat, this.lon)
+
       fetch(
         //`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`
-         `${this.url_base}weather?lat=${this.lat}&lon=${this.lon}&APPID=${this.api_key}&units=metric`
+        `${this.url_base}weather?lat=${this.lat}&lon=${this.lon}&APPID=${this.api_key}&units=metric`
       )
         .then((res) => {
           return res.json()
         })
-        .then(this.setResults) 
+        .then(this.setResults)
     },
     fetchWeather(e) {
       console.log(this)
@@ -135,15 +135,15 @@ export default {
   box-sizing: border-box;
 }
 
-button{
+button {
   font-family: '微軟正黑體';
   cursor: pointer;
   font-size: 2rem;
   outline: none;
   border: none;
   padding: 10px;
-  background: rgba(85,37,130,.5);
-  color: #FDB927;
+  background: rgba(85, 37, 130, 0.5);
+  color: #fdb927;
   margin-bottom: 35px;
 }
 
